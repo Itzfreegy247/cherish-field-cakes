@@ -1,106 +1,393 @@
-const categoryFilter = document.getElementById("categoryFilter");
-const searchInput = document.getElementById("searchInput");
-const cakeCards = document.querySelectorAll(".cake-card");
+console.log("ARISE is ready.");
 
-if (categoryFilter && searchInput) {
 
-    function filterCakes() {
+// =============================
+// PROGRAM MODAL
+// =============================
 
-        const selected = categoryFilter.value.toLowerCase();
-        const search = searchInput.value.toLowerCase();
+const programModal = document.getElementById("programModal");
 
-        cakeCards.forEach(card => {
+if (programModal) {
 
-            const category = card.dataset.category.toLowerCase();
+    const programButtons = document.querySelectorAll(".program-btn");
 
-            const title = card.querySelector(".details-btn")
-                .dataset.title.toLowerCase();
+    const modalClose = document.getElementById("modalClose");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalLevel = document.getElementById("modalLevel");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalFocus = document.getElementById("modalFocus");
+    const modalDuration = document.getElementById("modalDuration");
+    const modalFrequency = document.getElementById("modalFrequency");
 
-            const matchesCategory =
-                selected === "all" || category === selected;
 
-            const matchesSearch =
-                title.includes(search);
+    programButtons.forEach(function(button) {
 
-            if (matchesCategory && matchesSearch) {
+        button.addEventListener("click", function() {
 
-                card.classList.remove("hidden");
+            modalTitle.textContent = this.dataset.title;
+            modalLevel.textContent = this.dataset.level;
+            modalDescription.textContent = this.dataset.description;
+            modalFocus.textContent = this.dataset.focus;
+            modalDuration.textContent = this.dataset.duration;
+            modalFrequency.textContent = this.dataset.frequency;
 
-            } else {
-
-                card.classList.add("hidden");
-
-            }
+            programModal.classList.add("active");
 
         });
 
-    }
+    });
 
-    categoryFilter.addEventListener("change", filterCakes);
-    searchInput.addEventListener("keyup", filterCakes);
+
+    modalClose.addEventListener("click", function() {
+
+        programModal.classList.remove("active");
+
+    });
+
+
+    programModal.addEventListener("click", function(event) {
+
+        if (event.target === programModal) {
+
+            programModal.classList.remove("active");
+
+        }
+
+    });
 
 }
 
 
+// =============================
+// TRAINER MODAL
+// =============================
 
-categoryFilter.addEventListener("change", filterCakes);
+const trainerModal = document.getElementById("trainerModal");
 
-searchInput.addEventListener("keyup", filterCakes);
+if (trainerModal) {
 
+    const trainerButtons = document.querySelectorAll(".trainer-btn");
 
-const detailsButtons = document.querySelectorAll(".details-btn");
+    const trainerModalClose = document.getElementById("trainerModalClose");
 
-const modal = document.getElementById("cakeModal");
+    const trainerModalName = document.getElementById("trainerModalName");
 
-const modalImage = document.getElementById("modalImage");
+    const trainerModalRole = document.getElementById("trainerModalRole");
 
-const modalTitle = document.getElementById("modalTitle");
+    const trainerModalDescription = document.getElementById("trainerModalDescription");
 
-const modalRating = document.getElementById("modalRating");
+    const trainerModalExperience = document.getElementById("trainerModalExperience");
 
-const modalPrice = document.getElementById("modalPrice");
-
-const modalDescription = document.getElementById("modalDescription");
-
-const closeButton = document.querySelector(".close");
-
-
+    const trainerModalSpecialty = document.getElementById("trainerModalSpecialty");
 
 
-detailsButtons.forEach(function(button){
+    trainerButtons.forEach(function(button) {
 
-    button.addEventListener("click", function(event){
+        button.addEventListener("click", function() {
 
-        event.preventDefault();
+            trainerModalName.textContent = this.dataset.name;
 
-        modal.style.display = "flex";
+            trainerModalRole.textContent = this.dataset.role;
 
-    modalTitle.textContent = button.dataset.title;
+            trainerModalDescription.textContent = this.dataset.description;
 
-    modalPrice.textContent = button.dataset.price;
+            trainerModalExperience.textContent = this.dataset.experience;
 
-    modalRating.textContent = button.dataset.rating;
+            trainerModalSpecialty.textContent = this.dataset.specialty;
 
-    modalDescription.textContent = button.dataset.description;
+            trainerModal.classList.add("active");
 
-    modalImage.src = button.dataset.image;
-
+        });
 
     });
 
-});
+
+    trainerModalClose.addEventListener("click", function() {
+
+        trainerModal.classList.remove("active");
+
+    });
 
 
-closeButton.addEventListener("click",function(){
-    modal.style.display = "none";
-    
-})
+    trainerModal.addEventListener("click", function(event) {
 
-window.addEventListener("click" , function(event){
+        if (event.target === trainerModal) {
 
-    if (event.target === modal){
+            trainerModal.classList.remove("active");
 
-        modal.style.display = "none";   
+        }
 
-    }
-})
+    });
+
+}
+
+
+// =============================
+// MEMBERSHIP MODAL
+// =============================
+
+const membershipModal = document.getElementById("membershipModal");
+
+if (membershipModal) {
+
+    const membershipButtons =
+        document.querySelectorAll(".membership-btn");
+
+    const membershipModalClose =
+        document.getElementById("membershipModalClose");
+
+    const membershipCancel =
+        document.getElementById("membershipCancel");
+
+    const selectedPlan =
+        document.getElementById("selectedPlan");
+
+    const selectedPrice =
+        document.getElementById("selectedPrice");
+
+
+    membershipButtons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            selectedPlan.textContent =
+                this.dataset.plan;
+
+            selectedPrice.textContent =
+                this.dataset.price;
+
+            membershipModal.classList.add("active");
+
+        });
+
+    });
+
+
+    membershipModalClose.addEventListener("click", function() {
+
+        membershipModal.classList.remove("active");
+
+    });
+
+
+    membershipCancel.addEventListener("click", function() {
+
+        membershipModal.classList.remove("active");
+
+    });
+
+
+    membershipModal.addEventListener("click", function(event) {
+
+        if (event.target === membershipModal) {
+
+            membershipModal.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+// =============================
+// FITNESS CALCULATOR
+// =============================
+
+const fitnessForm = document.getElementById("fitnessForm");
+
+if (fitnessForm) {
+
+    fitnessForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        // GET USER INPUTS
+
+        const age = Number(document.getElementById("age").value);
+
+        const gender = document.getElementById("gender").value;
+
+        const weight = Number(document.getElementById("weight").value);
+
+        const height = Number(document.getElementById("height").value);
+
+        const activity = Number(document.getElementById("activity").value);
+
+
+        // =============================
+        // BMI CALCULATION
+        // =============================
+
+        const heightInMeters = height / 100;
+
+        const bmi = weight / (heightInMeters * heightInMeters);
+
+
+        let bmiCategory;
+
+
+        if (bmi < 18.5) {
+
+            bmiCategory = "UNDERWEIGHT";
+
+        }
+
+        else if (bmi < 25) {
+
+            bmiCategory = "HEALTHY RANGE";
+
+        }
+
+        else if (bmi < 30) {
+
+            bmiCategory = "OVERWEIGHT";
+
+        }
+
+        else {
+
+            bmiCategory = "OBESITY RANGE";
+
+        }
+
+
+        // =============================
+        // BMR CALCULATION
+        // =============================
+
+        let bmr;
+
+
+        if (gender === "male") {
+
+            bmr =
+                (10 * weight) +
+                (6.25 * height) -
+                (5 * age) +
+                5;
+
+        }
+
+        else {
+
+            bmr =
+                (10 * weight) +
+                (6.25 * height) -
+                (5 * age) -
+                161;
+
+        }
+
+
+        // =============================
+        // DAILY CALORIE ESTIMATE
+        // =============================
+
+        const dailyCalories = bmr * activity;
+
+
+        // =============================
+        // DISPLAY RESULTS
+        // =============================
+
+        document.getElementById("bmiResult").textContent =
+            bmi.toFixed(1);
+
+        document.getElementById("bmiCategory").textContent =
+            bmiCategory;
+
+        document.getElementById("calorieResult").textContent =
+            Math.round(dailyCalories);
+
+        document.getElementById("calculatorNote").textContent =
+            "These results are estimates and should be used as a general starting point rather than medical advice.";
+
+
+        // SHOW RESULTS
+
+        document
+            .getElementById("calculatorResults")
+            .classList.add("show");
+
+    });
+
+}
+
+// =============================
+// CONTACT FORM
+// =============================
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+
+    const contactStatus =
+        document.getElementById("contactStatus");
+
+
+    contactForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("contactName").value.trim();
+
+        const email =
+            document.getElementById("contactEmail").value.trim();
+
+        const subject =
+            document.getElementById("contactSubject").value.trim();
+
+        const message =
+            document.getElementById("contactMessage").value.trim();
+
+
+        // CHECK FOR EMPTY FIELDS
+
+        if (!name || !email || !subject || !message) {
+
+            contactStatus.textContent =
+                "Please complete all fields.";
+
+            contactStatus.classList.add("show");
+
+            return;
+
+        }
+
+
+        // BASIC EMAIL CHECK
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (!emailPattern.test(email)) {
+
+            contactStatus.textContent =
+                "Please enter a valid email address.";
+
+            contactStatus.classList.add("show");
+
+            return;
+
+        }
+
+
+        // SUCCESS MESSAGE
+
+        contactStatus.textContent =
+            `Thanks, ${name}! Your message has been received.`;
+
+        contactStatus.classList.add("show");
+
+
+        // CLEAR FORM
+
+        contactForm.reset();
+
+    });
+
+}

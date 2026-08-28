@@ -195,34 +195,14 @@ nav ul li a:hover {
 }
 
 .btn-primary {
-    display: inline-block;
-    width: 220px;
-    padding: 16px 30px;
-
     background: #00A8FF;
     color: #0B0D0F;
-
-    text-decoration: none;
-    text-align: center;
-
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-
-    border: 1px solid #00A8FF;
-    box-sizing: border-box;
-
-    cursor: pointer;
-
-    transition: 0.3s ease;
 }
 
 .btn-primary:hover {
-    background: transparent;
-    color: #FFFFFF;
-
     transform: translateY(-3px);
 }
+
 .btn-secondary {
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
